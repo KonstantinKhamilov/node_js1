@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная</title>
+    
+</head>
+<body>
+    <h1>Главная страница</h1>
+    <nav>
+        <a href="/">Главная</a> |
+        <a href="library.html">Библиотека</a>
+    </nav>
+    <div id="time"></div>
+
+    <script>
+    fetch('/lastHomePageRequestTime')
+    .then(response => response.json())
+    .then(data => {
+        const timeElement = document.getElementById('time');
+        timeElement.textContent = `Время последнего запроса: ${new Date(data.lastHomePageRequestTime).toLocaleTimeString()}`;
+    });
+
+    fetch('/gradient')
+    .then(response => response.json())
+    .then(data => {
+        document.body.style.background = data.gradient;
+    });
+    </script>
+</body>
+</html>
