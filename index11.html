@@ -33,25 +33,38 @@
     <button onclick="addProduct()">Add Product</button>
 
     <div id='products'></div>
+<!-- Поля для ввода данных нового продукта -->
+<div>
+    <input type="text" id="newProductId" placeholder="Product ID">
+    <input type="text" id="newProductName" placeholder="Product Name">
+    <input type="number" id="newProductPrice" placeholder="Product Price">
+    <button onclick="addProduct()">Add Product</button>
+</div>
 
-    <!-- Ваш новый код здесь -->
-    <script>
-        function addProduct() {
-            fetch('http://localhost:3000/products', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: "#4",
-                    name: "new product",
-                    price: 15.0,
-                }),
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => console.error('Error:', error));
-        }
-    </script>
+<script>
+function addProduct() {
+    // Получение значений полей ввода
+    const id = document.getElementById('newProductId').value;
+    const name = document.getElementById('newProductName').value;
+    const price = document.getElementById('newProductPrice').value;
+
+    // Отправка POST-запроса на сервер с данными нового продукта
+    fetch('http://localhost:3000/products', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: id,
+            name: name,
+            price: parseFloat(price),
+        }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => console.error('Error:', error));
+}
+</script>
+
 </body>
 </html>
