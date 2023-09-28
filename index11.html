@@ -1,69 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>index11</title>
-    <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="description" lang="ru" content="Стили css">
-            <meta name="author" content="Константин">
-            <meta name="keywords" content="Программирование, уроки JavaScript">
-            <meta name="robots" content="all">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="" type="text/css">
+    <title>Online Store</title>
 </head>
-<style>
-    .product {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        border: 1px solid black;
-        margin: 5px;
-        text-align: center;
-    }
-</style>
 <body>
-    <h3>Products list</h3>
-    <div>type</div>
-    <select name="prod" id="prod">
-        <option value="id">Id</option>
-        <option value="name">Name</option>
-        <option value="price">Price</option>
-    </select>
-    <button onclick="go()">Sort!</button>
-    <button onclick="addProduct()">Add Product</button>
+    <h1>Online Store</h1>
 
+    <h2>Products</h2>
+    <button onclick="getProducts()">Refresh Products</button>
     <div id='products'></div>
-<!-- Поля для ввода данных нового продукта -->
-<div>
-    <input type="text" id="newProductId" placeholder="Product ID">
-    <input type="text" id="newProductName" placeholder="Product Name">
-    <input type="number" id="newProductPrice" placeholder="Product Price">
-    <button onclick="addProduct()">Add Product</button>
-</div>
 
 <script>
-function addProduct() {
-    // Получение значений полей ввода
-    const id = document.getElementById('newProductId').value;
-    const name = document.getElementById('newProductName').value;
-    const price = document.getElementById('newProductPrice').value;
-
-    // Отправка POST-запроса на сервер с данными нового продукта
-    fetch('http://localhost:3000/products', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: id,
-            name: name,
-            price: parseFloat(price),
-        }),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => console.error('Error:', error));
+function getProducts() {
+    fetch('http://localhost:3000/products')
+        .then(response => response.json())
+        .then(data => {
+            const productsDiv = document.getElementById('products');
+            productsDiv.innerHTML = '';
+            data.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.textContent = `ID: ${product.id}, Name: ${product.name}, Price: ${product.price}`;
+                productsDiv.appendChild(productDiv);
+            });
+        })
+        .catch((error) => console.error('Error:', error));
 }
+
+// Получить список продуктов при загрузке страницы
+window.onload = getProducts;
 </script>
 
 </body>
