@@ -30,36 +30,27 @@
         <option value="price">Price</option>
     </select>
     <button onclick="go()">Sort!</button>
+    <button onclick="addProduct()">Add Product</button>
 
     <div id='products'></div>
-    <script src="/path/to/your/products.js"></script> <!-- Путь к вашему файлу с товарами -->
+
+    <!-- Ваш новый код здесь -->
     <script>
-        let list = [
-    {id : "#1", name : 'strawberry', price : 12.1},
-    {id : "#2", name : 'potato', price : 5.5},
-    {id : "#3", name : 'bread', price : 10.3},
-    // Добавьте новый товар здесь
-    {id : "#4", name : 'new product', price : 15.0},
-];
-
-        const mysort = (arr, cmp) => arr.sort(cmp);
-
-        const show = arr => {
-            let result = '';
-            for (let i = 0; i < arr.length; i++) {
-                result += `<div class='product'>
-                    <div class='id'>${arr[i].id}</div>
-                    <div class='name'>${arr[i].name}</div>
-                    <div class='price'>${arr[i].price}</div>
-                </div>`;
-            }
-            return result;
-        }
-
-        const go = () => {
-            let cmp = prod.value;
-            mysort(list, (a,b) => (a[cmp] > b[cmp]) ? 1 : -1);
-            document.getElementById("products").innerHTML = show(list);
+        function addProduct() {
+            fetch('http://localhost:3000/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: "#4",
+                    name: "new product",
+                    price: 15.0,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
         }
     </script>
 </body>
