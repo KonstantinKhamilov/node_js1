@@ -22,12 +22,6 @@
     }
 </style>
 <body>
-    <div class='product'>
-        <div class='id'></div>
-        <div class='name'></div>
-        <div class='price'></div>
-    </div>`
-
     <h3>Products list</h3>
     <div>type</div>
     <select name="prod" id="prod">
@@ -38,32 +32,35 @@
     <button onclick="go()">Sort!</button>
 
     <div id='products'></div>
+    <script src="/path/to/your/products.js"></script> <!-- Путь к вашему файлу с товарами -->
     <script>
         let list = [
     {id : "#1", name : 'strawberry', price : 12.1},
     {id : "#2", name : 'potato', price : 5.5},
     {id : "#3", name : 'bread', price : 10.3},
+    // Добавьте новый товар здесь
+    {id : "#4", name : 'new product', price : 15.0},
 ];
 
-const mysort = (arr, cmp) => arr.sort(cmp);
+        const mysort = (arr, cmp) => arr.sort(cmp);
 
-const show = arr => {
-    let result = '';
-    for (let i = 0; i < arr.length; i++) {
-        result += `<div class='product'>
-            <div class='id'>${arr[i].id}</div>
-            <div class='name'>${arr[i].name}</div>
-            <div class='price'>${arr[i].price}</div>
-        </div>`;
-    }
-    return result;
-}
+        const show = arr => {
+            let result = '';
+            for (let i = 0; i < arr.length; i++) {
+                result += `<div class='product'>
+                    <div class='id'>${arr[i].id}</div>
+                    <div class='name'>${arr[i].name}</div>
+                    <div class='price'>${arr[i].price}</div>
+                </div>`;
+            }
+            return result;
+        }
 
-const go = () => {
-    let cmp = prod.value;
-    mysort(list, (a,b) => (a[cmp] > b[cmp]) ? 1 : -1);
-    document.getElementById("products").innerHTML = show(list);
-}
+        const go = () => {
+            let cmp = prod.value;
+            mysort(list, (a,b) => (a[cmp] > b[cmp]) ? 1 : -1);
+            document.getElementById("products").innerHTML = show(list);
+        }
     </script>
 </body>
 </html>
