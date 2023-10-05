@@ -25,3 +25,15 @@ exports.filterProducts = (req, res) => {
     }
     res.json(filteredProducts);
 };
+exports.createProduct = (req, res) => {
+    const newProduct = req.body;
+    newProduct.id = products.length + 1; // Присвоить новому товару ID
+    products.push(newProduct);
+    res.json(newProduct);
+};
+
+exports.deleteProduct = (req, res) => {
+    const productId = req.params.id;
+    products = products.filter(p => p.id !== productId); // Удалить товар из массива
+    res.json({ message: `Product with id ${productId} deleted` });
+};
