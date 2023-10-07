@@ -9,7 +9,7 @@
     <h2>Products</h2>
     <button onclick="getProducts()">Refresh Products</button>
     <div id='products'></div>
-
+    <button onclick="addProduct()">Add Product</button>
 <script>
 function getProducts() {
     fetch('http://localhost:3000/products')
@@ -26,7 +26,23 @@ function getProducts() {
         .catch((error) => console.error('Error:', error));
 }
 
-// Получить список продуктов при загрузке страницы
+function addProduct() {
+    fetch('http://localhost:3000/products', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: 'Новый товар', price: 600 }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        getProducts(); // Получить и отобразить все товары после добавления нового
+    })
+    .catch((error) => console.error('Error:', error));
+}
+
+
 window.onload = getProducts;
 </script>
 
