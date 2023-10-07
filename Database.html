@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database</title>
+</head>
+<style>
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table:nth-of-type(1) {
+    background-color: #f2f2f2;
+}
+
+table:nth-of-type(2) {
+    background-color: #d1e7dd;
+}
+
+table:nth-of-type(3) {
+    background-color: #c2e0f4;
+}
+
+table:nth-of-type(4) {
+    background-color: #d5c6e0;
+}
+
+table:nth-of-type(5) {
+    background-color: #f9cb9c;
+}
+
+table tr:hover {background-color: #ddd;}
+
+</style>
+<body>
+    <h2>1. Пациенты (Patients)</h2>
+<table>
+    <tr><th>ID (первичный ключ)</th></tr>
+    <tr><td>Имя</td></tr>
+    <tr><td>Фамилия</td></tr>
+    <tr><td>Дата рождения</td></tr>
+    <tr><td>Адрес</td></tr>
+</table>
+
+<h2>2. Врачи (Doctors)</h2>
+<table>
+    <tr><th>ID (первичный ключ)</th></tr>
+    <tr><td>Имя</td></tr>
+    <tr><td>Фамилия</td></tr>
+    <tr><td>Специализация</td></tr>
+</table>
+
+<h2>3. Контракты (Contracts)</h2>
+<table>
+    <tr><th>ID (первичный ключ)</th></tr>
+    <tr><td>ID пациента (внешний ключ, связь one-to-many с таблицей Пациенты)</td></tr>
+    <tr><td>ID врача (внешний ключ, связь one-to-many с таблицей Врачи)</td></tr>
+    <tr><td>Дата заключения контракта</td></tr>
+</table>
+
+<h2>4. Направления (Referrals)</h2>
+<table>
+    <tr><th>ID (первичный ключ)</th></tr>
+    <tr><td>ID пациента (внешний ключ, связь one-to-many с таблицей Пациенты)</td></tr>
+    <tr><td>ID врача (внешний ключ, связь one-to-many с таблицей Врачи)</td></tr>
+    <tr><td>Дата направления</td></tr>
+</table>
+
+<h2>5. Приемы (Appointments)</h2>
+<table>
+    <tr><th>ID (первичный ключ)</th></tr>
+    <tr><td>ID пациента (внешний ключ, связь one-to-many с таблицей Пациенты)</td></tr>
+    <tr><td>ID врача (внешний ключ, связь one-to-many с таблицей Врачи)</td></tr>
+    <tr><td>ID направления (внешний ключ, связь one-to-one с таблицей Направления)</td></tr>
+    <tr><td>Дата приема</td></tr>
+    <tr><td>Симптомы</td></tr>
+    <tr><td>Рецепты</td></tr>
+</table>
+</body>
+</html>
