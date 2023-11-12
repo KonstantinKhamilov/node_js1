@@ -5,7 +5,7 @@
   "main": "public/server.ts",
   "type": "commonjs",
   "scripts": {
-    "start": "node DZ18.js"
+    "start": "node DZ19.js"
   },
   "keywords": [],
   "author": "",
